@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">overlay</string>
+    <string name="but_start">Start</string>
+    <string name="but_stop">Stop</string>
+
+    <string name="msg_permission_not_granted">This app requires the permission to draw over other apps to work</string>
+
+    <string name="but_change_permissions">Change permissions</string>
+    <string name="but_cancel">Cancel</string>
+
+    <string name="permission_explanation">App requires permission to draw over other apps</string>
+</resources>
