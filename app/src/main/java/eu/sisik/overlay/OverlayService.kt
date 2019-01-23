@@ -1,15 +1,15 @@
 package eu.sisik.overlay
 
-import android.app.Notification
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.LocalBroadcastManager
 import android.graphics.PixelFormat
 import android.os.Build
+import android.support.annotation.RequiresApi
 import android.view.*
 
 
@@ -56,6 +56,14 @@ class OverlayService: Service() {
                 PendingIntent.getActivity(this, 0, notificationIntent, 0)
             }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_NONE)
+            channel.lightColor = Color.BLUE
+            channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.createNotificationChannel(channel)
+        }
+
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(getText(R.string.app_name))
             .setContentText(getText(R.string.app_name))
@@ -65,6 +73,11 @@ class OverlayService: Service() {
             .build()
 
         startForeground(ONGOING_NOTIFICATION_ID, notification)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(nm: NotificationManager, channelId: String, channelName: String) {
+
     }
 
     fun initOverlay() {
@@ -98,6 +111,7 @@ class OverlayService: Service() {
 
         val ONGOING_NOTIFICATION_ID = 6661
         val CHANNEL_ID = "overlay_channel_id"
+        val CHANNEL_NAME = "overlay_channel_name"
 
         val ACTION_OVERLAY_SERVICE_STARTED = "eu.sisik.action.OVERLAY_SERVICE_STARTED"
         val ACTION_OVERLAY_SERVICE_STOPPED = "eu.sisik.action.OVERLAY_SERVICE_STOPPED"
