@@ -93,7 +93,7 @@ class OverlayService: Service() {
 
         val params = WindowManager.LayoutParams(
             type,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
         )
 
