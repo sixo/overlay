@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.IBinder
-import android.support.v4.app.NotificationCompat
-import android.support.v4.content.LocalBroadcastManager
+import androidx.core.app.NotificationCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.graphics.PixelFormat
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.view.*
 
 
@@ -75,10 +75,6 @@ class OverlayService: Service() {
         startForeground(ONGOING_NOTIFICATION_ID, notification)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(nm: NotificationManager, channelId: String, channelName: String) {
-
-    }
 
     fun initOverlay() {
 
@@ -88,7 +84,7 @@ class OverlayService: Service() {
 
         val type = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
                             WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY
-                        else
+                       else
                             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 
         val params = WindowManager.LayoutParams(
